@@ -32,7 +32,7 @@ function Admin() {
   this.register = function(req, res) {
     connection.acquire(function(err, con) {
       console.log(req);
-      var insert_ele = {email_id: req.username, name: req.name, password: req.password};
+      var insert_ele = {email_id: req.username, name: "default", password: req.password};
       con.query('insert into Admin set ?', insert_ele, function(err, result) {
       con.release();
         if (err) {
