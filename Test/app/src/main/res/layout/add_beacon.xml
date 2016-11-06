@@ -9,17 +9,17 @@
 
     <TextView
         android:text="Beacon ID"
-        android:layout_height="wrap_content"
-        android:id="@+id/BeaconId"
-        android:layout_width="150dp" />
+        android:id="@+id/BeaconIdtext"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Beacon ID"
         android:ems="10"
-        android:id="@+id/editId" />
+        android:id="@+id/editId"
+        android:hint="BeaconID" />
 
     <TextView
         android:text="Title"
@@ -31,12 +31,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Title"
         android:ems="10"
-        android:id="@+id/editTitle" />
+        android:id="@+id/editTitle"
+        android:hint="Title" />
 
     <TextView
-        android:text="TextView"
+        android:text="Desc"
         android:layout_height="wrap_content"
         android:id="@+id/Desc"
         android:layout_width="150dp"
@@ -46,12 +46,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Add Desc"
         android:ems="10"
-        android:id="@+id/editDesc" />
+        android:id="@+id/editDesc"
+        android:hint="Add Desc" />
 
     <TextView
-        android:text="URL"
+        android:text="@string/url"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/textView5" />
@@ -60,9 +60,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Add Url"
         android:ems="10"
-        android:id="@+id/editUrl" />
+        android:id="@+id/editUrl"
+        android:hint="Add Url" />
 
     <Button
         android:text="Add"

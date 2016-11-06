@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="beacon.com.beaconapp.MainActivity">
+    tools:context="beacon.com.test.MainActivity">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addBeacons"
