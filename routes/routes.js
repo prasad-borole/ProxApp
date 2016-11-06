@@ -15,5 +15,11 @@ module.exports = {
     app.post('/getBeacons', function(req, res) {
       beacon.beaconsList(req.body, res);
     });
+    app.post('/login', function(req, res) {
+      admin.authenticate(req.body, res);
+    });
+    app.post('/signup', function(req, res) {
+      admin.register(req.body, res);
+    });
   }
 };
