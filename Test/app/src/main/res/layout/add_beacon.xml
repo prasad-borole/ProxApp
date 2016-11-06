@@ -7,11 +7,6 @@
               android:orientation="vertical"
               app2:layout_collapseParallaxMultiplier="0.0">
 
-    <TextView
-        android:text="Beacon ID"
-        android:id="@+id/BeaconIdtext"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content" />
 
     <EditText
         android:layout_width="match_parent"
@@ -21,11 +16,6 @@
         android:id="@+id/editId"
         android:hint="BeaconID" />
 
-    <TextView
-        android:text="Title"
-        android:layout_height="wrap_content"
-        android:id="@+id/beaconTitle"
-        android:layout_width="150dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -35,12 +25,6 @@
         android:id="@+id/editTitle"
         android:hint="Title" />
 
-    <TextView
-        android:text="Desc"
-        android:layout_height="wrap_content"
-        android:id="@+id/Desc"
-        android:layout_width="150dp"
-        tools:text="Description" />
 
     <EditText
         android:layout_width="match_parent"
@@ -50,11 +34,6 @@
         android:id="@+id/editDesc"
         android:hint="Add Desc" />
 
-    <TextView
-        android:text="@string/url"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView5" />
 
     <EditText
         android:layout_width="match_parent"
@@ -72,14 +51,5 @@
         style="@android:style/Widget.Button"
         android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:text="Cancel"
-        android:layout_height="wrap_content"
-        android:id="@+id/CancelAdd"
-        android:layout_width="150dp"
-        android:elevation="7dp"
-        android:visibility="visible"
-        style="@android:style/Widget.Button"
-        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
