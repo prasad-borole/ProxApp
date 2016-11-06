@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Beacon Proximity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="nav_item_beacons">Nearby Beacons</string>
+    <string name="nav_item_login">Login</string>
+
+    <string name="beaconId">Beacon UID: </string>
+    <string name="title">Title: </string>
+    <string name="description">Description: </string>
+    <string name="url">URL: </string>
+
+</resources>

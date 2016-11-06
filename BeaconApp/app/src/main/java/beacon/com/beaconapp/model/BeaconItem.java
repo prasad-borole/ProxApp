@@ -10,6 +10,14 @@ public class BeaconItem {
     private String description;
     private String url;
 
+    public BeaconItem(String beaconId, int rssi, String title, String description, String url) {
+        this.beaconId = beaconId;
+        this.rssi = rssi;
+        this.title = title;
+        this.description = description;
+        this.url = url;
+    }
+
     public String getBeaconId() {
         return beaconId;
     }
@@ -60,4 +68,6 @@ public class BeaconItem {
                 ", url='" + url + '\'' +
                 '}';
     }
+
+
 }

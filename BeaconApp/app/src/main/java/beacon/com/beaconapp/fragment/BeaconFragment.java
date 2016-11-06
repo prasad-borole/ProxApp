@@ -10,6 +10,8 @@ import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,22 +19,27 @@ import android.view.ViewGroup;
 import android.os.Handler;
 import android.widget.ProgressBar;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import beacon.com.beaconapp.R;
+import beacon.com.beaconapp.adapter.BeaconAdapter;
+import beacon.com.beaconapp.model.BeaconItem;
 
 
 public class BeaconFragment extends Fragment {
 
     private static final String TAG = BeaconFragment.class.getSimpleName();
 
+    private RecyclerView recyclerView;
+    private BeaconAdapter beaconAdapter;
     private BluetoothManager btManager;
     private BluetoothAdapter btAdapter;
-    private Handler scanHandler = new Handler();
-    private int scan_interval_ms = 10000;
-    private boolean isScanning = false;
     private ProgressBar progressBar;
     FloatingActionButton scanButton;
     CountDownTimer countDownTimer;
-    public int progress = 0;
+    Set<String> scannedBeacons;
+
 
     public BeaconFragment() {
         // Required empty public constructor
@@ -47,6 +54,11 @@ public class BeaconFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_beacon, container, false);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.beaconList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        beaconAdapter = new BeaconAdapter(getContext());
+        recyclerView.setAdapter(beaconAdapter);
 
         scanButton = (FloatingActionButton) rootView.findViewById(R.id.scanBeacons);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
@@ -65,17 +77,14 @@ public class BeaconFragment extends Fragment {
 
     private void startScanning() {
         // init BLE
+        scannedBeacons = new HashSet<>();
         btManager = (BluetoothManager) getContext().getSystemService(getContext().BLUETOOTH_SERVICE);
         btAdapter = btManager.getAdapter();
-
-
-        progressBar.setProgress(progress);
 
         countDownTimer = new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                progress ++;
-                progressBar.setProgress(progress);
+
             }
 
             @Override
@@ -102,28 +111,6 @@ public class BeaconFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
-    private Runnable scanRunnable = new Runnable() {
-        @Override
-        public void run() {
-
-            if (isScanning) {
-                if (btAdapter != null) {
-                    scanButton.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.GONE);
-                    btAdapter.stopLeScan(leScanCallback);
-                }
-            } else {
-                if (btAdapter != null) {
-                    scanButton.setVisibility(View.GONE);
-                    progressBar.setVisibility(View.VISIBLE);
-                    btAdapter.startLeScan(leScanCallback);
-                }
-            }
-            isScanning = !isScanning;
-            //scanHandler.postDelayed(this, scan_interval_ms);
-        }
-    };
 
 
     private BluetoothAdapter.LeScanCallback leScanCallback = new BluetoothAdapter.LeScanCallback() {
@@ -160,10 +147,22 @@ public class BeaconFragment extends Fragment {
                 final int minor = (scanRecord[startByte + 22] & 0xff) * 0x100 + (scanRecord[startByte + 23] & 0xff);
 
                 Log.i(TAG, "UUID: " + uuid + "\\nmajor: " + major + "\\nminor" + minor + " RSSI: " + rssi);
+
+                getBeaconInfoAndAdd(new BeaconItem(uuid, rssi, "Google", "This is google address", "https://www.google.com"));
             }
 
         }
     };
+
+    private void getBeaconInfoAndAdd(BeaconItem item) {
+        if(scannedBeacons.contains(item.getBeaconId())) {
+            return;
+        }
+        scannedBeacons.add(item.getBeaconId());
+        beaconAdapter.add(item);
+        recyclerView.invalidate();
+
+    }
 
     /**
      * bytesToHex method
